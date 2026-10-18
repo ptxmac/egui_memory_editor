@@ -1,6 +1,6 @@
 [package]
 name = "egui_memory_editor"
-version = "0.2.15"
+version = "0.2.16"
 authors = ["Hirtol <rust@hirtol.top>"]
 edition = "2024"
 description = "A simple memory editor for the egui library"
@@ -26,4 +26,3 @@ eframe = "0.36"
 version = "1"
 features = ["derive"]
 optional = true
-
