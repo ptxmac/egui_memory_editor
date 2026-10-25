@@ -2,6 +2,10 @@
 
 All notable changes to the `egui_memory_editor` crate will be documented in this file.
 
+## Unreleased
+
+* Add `MemoryEditor::goto_address`
+
 ## 0.2.11 - 2025-04-08
 
 * Update `egui` to `0.31`

@@ -512,6 +512,27 @@ impl MemoryEditor {
     pub fn set_options(&mut self, options: MemoryEditorOptions) {
         self.options = options;
     }
+
+    /// Scroll to `address` and highlight it, as entering it in the goto field does.
+    ///
+    /// Switches to the first address range containing `address` if the selected one doesn't, and does nothing if
+    /// no range contains it.
+    pub fn goto_address(&mut self, address: Address) {
+        let range = match self.address_ranges.get(&self.options.selected_address_range) {
+            Some(range) if range.contains(&address) => range.clone(),
+            _ => {
+                let Some((name, range)) = self.address_ranges.iter().find(|(_, range)| range.contains(&address)) else {
+                    return;
+                };
+                self.options.selected_address_range = name.clone();
+                range.clone()
+            }
+        };
+
+        self.frame_data.goto_address_string = format!("{:X}", address);
+        self.frame_data.goto_address_line = Some((address - range.start) / self.options.column_count);
+        self.frame_data.selected_highlight_address = Some(address);
+    }
 }
 
 impl Default for MemoryEditor {
